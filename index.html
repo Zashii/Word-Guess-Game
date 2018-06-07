@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    <meta charset="UTF-8">
+    <title>Word Guess Game</title>
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Cormorant+Unicase" rel="stylesheet">
+    
+    <style>
+
+      body {
+        background-image: url("http://backgroundcheckall.com/wp-content/uploads/2017/12/medieval-background-5.jpg");
+        background-size: 1550px;
+        background-repeat: no-repeat;
+        font-family: 'Cormorant Unicase', serif;
+      }
+
+      h1 {
+        letter-spacing: 3px;
+        font-size: 1.5vw;
+        margin-right:0px;
+      }
+
+    </style>
+  </head>
+  <body>
+         <div class="container" style="text-align:center; margin-top:5%; left: 0; bottom: 0%">
+
+          <img src="assets\images\Scrolled_Paper_PNG_Clipart_Image.png" style="width:50%"/>
+          <div class="center">
+              <h1 id="text"> Press any key to get started! </h1>
+              <p> Number of wins: <span id=winCount></span></p>
+              <p> Number of Guesses left: <span id=guessCount></span></p>
+              <p> Guesses: <span id=pastGuesses></span></p>
+          </div>
+        </div>
+        <script>
+
+        var sound = document.createElement("audio");
+        sound.setAttribute("src", "https://www.zapsplat.com/wp-content/uploads/2015/sound-effects-18146/zapsplat_warfare_sword_swipe_slash_body_squelch_20830.mp3");
+
+            // Game Object
+             var game = {
+                  winCount : 0,
+                  hiddenWord : "",
+                  words : ["knight", "castle", "king", "sword", "catapult", "archer", "dragon", "wizard", "war"],
+                  word : "",
+                  guesses : 0,
+
+                  gameStart : function() {
+                      
+                      document.getElementById("pastGuesses").textContent = "";
+
+                      this.hiddenWord = "";
+                      this.word = this.words[Math.floor(Math.random()*this.words.length)];
+
+                      if (this.hiddenWord == ""){
+                                
+                            for (var i = 0; i < this.word.length; i ++){
+                                this.hiddenWord = this.hiddenWord + "_"
+                            }
+
+                            document.getElementById("text").textContent = this.hiddenWord;
+                                        
+                      }
+
+                      this.guesses = this.word.length + 3;
+                      document.getElementById("guessCount").textContent = this.guesses;
+
+                  },
+
+                  gameSetup : function(e) {
+
+                      this.guesses -= 1;
+                      document.getElementById("guessCount").textContent = this.guesses;
+                      document.getElementById("pastGuesses").textContent = document.getElementById("pastGuesses").textContent + " " + e.key;
+
+                      for (var y = 0; y < this.word.length; y ++){
+                          if (this.word[y] == e.key) {
+                              this.hiddenWord = this.hiddenWord.substr(0, y) + e.key  + this.hiddenWord.substr(y + 1);
+                              document.getElementById("text").textContent = this.hiddenWord;
+                          }
+                      }
+                  },
+
+                  win : function() {
+                      document.getElementById("text").textContent = "You win!";
+                      sound.play();
+                      this.winCount ++;
+                      document.getElementById("winCount").textContent = this.winCount;
+                  },
+
+                  lose : function() {
+                      document.getElementById("text").textContent = "You lose!";
+                  }
+
+             };
+
+
+            // Initializing the game
+
+           
+
+            // Reacting to the user's input
+            document.onkeyup = function(e) {
+
+                if (word = ""){
+                    game.gameStart();
+                }
+
+                game.gameSetup(e);
+
+                // Win condition
+                if (game.hiddenWord == game.word) {
+                    game.win();
+                    game.gameStart();
+
+                // Lose condition
+                } else if (game.guesses == 0) {
+                    game.lose();
+                    game.gameStart();
+
+                }
+                
+          }
+            
+           </script>
+
+
+  </body>
+</html>

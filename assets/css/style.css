@@ -1,0 +1,44 @@
+h1 {
+    letter-spacing: 3px;
+    font-size: 1.1vw;
+    margin-right:0px;
+  }
+
+  p {
+    font-size: 1.3vw;
+  }
+
+  body {
+    background-image: url("http://backgroundcheckall.com/wp-content/uploads/2017/12/medieval-background-5.jpg");
+    background-size: 1550px;
+    background-repeat: no-repeat;
+    font-family: 'Cormorant Unicase', serif;
+  }
+
+  .container {
+    position: relative;
+}
+
+  .center {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 30%;
+    width: 100%;
+    text-align: center;
+    font-size: 18px;
+  }
+
+  img { 
+    width: 100%;
+    height: auto;
+  }
+
+  @media only screen and (max-width: 768px) {
+    h1 {
+      font-size: 0.9vw;
+    }
+    body {
+      overflow: hidden;
+    }
+}

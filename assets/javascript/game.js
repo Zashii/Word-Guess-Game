@@ -16,8 +16,11 @@ var sound = document.createElement("audio");
                       document.getElementById("pastGuesses").textContent = "";
 
                       this.hiddenWord = "";
+
+                      //Choosing the word from the words array
                       this.word = this.words[Math.floor(Math.random()*this.words.length)];
 
+                      // Creating the hidden word
                       if (this.hiddenWord == ""){
                                 
                             for (var i = 0; i < this.word.length; i ++){
@@ -28,17 +31,24 @@ var sound = document.createElement("audio");
                                         
                       }
 
+                      // You are given guesses equal to the word's length + 3
                       this.guesses = this.word.length + 3;
                       document.getElementById("guessCount").textContent = this.guesses;
 
                   },
 
+                  // Processing the result of the user's input
+
                   gameSetup : function(e) {
 
+                      //Guesses count goes down by 1
                       this.guesses -= 1;
                       document.getElementById("guessCount").textContent = this.guesses;
+
+                      //Past guesses display is updated
                       document.getElementById("pastGuesses").textContent = document.getElementById("pastGuesses").textContent + " " + e.key;
 
+                      //If the hidden word contains the letter that the user inputted, re-create hiddenWord with the revealed letter
                       for (var y = 0; y < this.word.length; y ++){
                           if (this.word[y] == e.key) {
                               this.hiddenWord = this.hiddenWord.substr(0, y) + e.key  + this.hiddenWord.substr(y + 1);
@@ -47,6 +57,7 @@ var sound = document.createElement("audio");
                       }
                   },
 
+                  // Win method
                   win : function() {
                       document.getElementById("text").textContent = "You win!";
                       sound.play();
@@ -56,13 +67,14 @@ var sound = document.createElement("audio");
                       document.getElementById("winCount").textContent = this.winCount;
                   },
 
+                  // Lose method
                   lose : function() {
                       document.getElementById("text").textContent = "You lose!";
                   }
 
              };
 
-            // Reacting to the user's input
+            // Event listener that listens to the user's input
             document.onkeyup = function(e) {
 
                 //if the game hasn't started yet, run the gameStart method

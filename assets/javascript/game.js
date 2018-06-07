@@ -9,6 +9,8 @@ var sound = document.createElement("audio");
                   word : "",
                   guesses : 0,
 
+                  // Initializing the game
+
                   gameStart : function() {
                       
                       document.getElementById("pastGuesses").textContent = "";
@@ -48,7 +50,9 @@ var sound = document.createElement("audio");
                   win : function() {
                       document.getElementById("text").textContent = "You win!";
                       sound.play();
-                      this.winCount ++;
+                      if (this.word != ""){
+                        this.winCount ++;
+                      }
                       document.getElementById("winCount").textContent = this.winCount;
                   },
 
@@ -58,14 +62,10 @@ var sound = document.createElement("audio");
 
              };
 
-
-            // Initializing the game
-
-           
-
             // Reacting to the user's input
             document.onkeyup = function(e) {
 
+                //if the game hasn't started yet, run the gameStart method
                 if (word = ""){
                     game.gameStart();
                 }

@@ -1,5 +1,5 @@
 var sound = document.createElement("audio");
-        sound.setAttribute("src", "https://www.zapsplat.com/wp-content/uploads/2015/sound-effects-18146/zapsplat_warfare_sword_swipe_slash_body_squelch_20830.mp3");
+        sound.setAttribute("src", "assets/sound.mp3");
 
             // Game Object
              var game = {

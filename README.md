@@ -1,5 +1,7 @@
 # Word-Guess-Game
 
+Deployed Link: https://zashii.github.io/Word-Guess-Game/
+
 This is a game meant to simulate a Hang Man game. The theme for the game is Medieval Fantasy. Go forth, heroes!
 
 The game will ask you to press a key to start the game.
